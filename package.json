@@ -1,6 +1,6 @@
 {
   "name": "gifmeme",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "Meme an animated gif with GM",
   "main": "index.js",
   "scripts": {

@@ -1,9 +1,9 @@
-var gifmeme = require('./index');
+var gifmeme = require('./index')();
 
-gifmeme.generate('./test.gif', 'Top of My Meme', 'Bottom of my Meme YEAH!!!!', function(err, filename){
-    if(err){
-        console.log(err);
-    } else {
-        console.log(filename);
-    }
-});
+try{
+    gifmeme.generate('./test.gif', 'Top of My Meme', 'Bottom of my Meme YEAH!!!!').then(memeFilename =>{
+        console.log(memeFilename);
+    });
+} catch(e){
+    console.log(e);
+}

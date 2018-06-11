@@ -1,7 +1,7 @@
 {
   "name": "gifmeme",
-  "version": "1.2.2",
-  "description": "Meme an animated gif with Canvas and GM",
+  "version": "2.0.0",
+  "description": "Meme an animated gif with GM",
   "main": "index.js",
   "scripts": {
     "test": "node test.js"
@@ -17,8 +17,8 @@
   },
   "homepage": "https://github.com/Moosylvania/GifMeme#readme",
   "dependencies": {
-    "canvas": "^1.4.0",
-    "gm": "^1.23.0"
+    "gm": "^1.23.1",
+    "string-pixel-width": "^1.7.0"
   },
   "devDependencies": {},
   "keywords": [

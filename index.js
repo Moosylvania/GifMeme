@@ -1,5 +1,5 @@
 var fs = require('fs');
-var Canvas = require('canvas');
+var pixelWidth = require('string-pixel-width');
 var gm = require('gm').subClass({imageMagick: true});
 
 var outputDirectory = './tmp';
@@ -9,22 +9,19 @@ var endsWith = function(str, suffix) {
     return str.indexOf(suffix, str.length - suffix.length) !== -1;
 };
 
-var getFontSize = function(context, text, width, height) {
+var getFontSize = function(text, width, height) {
     var fontSize = 100;
-    context.textAlign = "center";
-    context.fillStyle = "#fff";
-    context.strokeStyle = "#000";
-    context.lineWidth = 6;
+    var textWidth = 0;
 
     while(1) {
-        context.font = "bold " + fontSize + "px Impact";
-        if( (context.measureText(text).width < (width-15)) && (fontSize < height/10) ) {
+        textWidth = pixelWidth(text, {size:fontSize, font:'impact'});
+        if( ( textWidth < (width-15)) && (fontSize < height/10) ) {
             break;
         }
         fontSize-=2;
     }
-
-    return {fontSize:fontSize, width:context.measureText(text).width};
+    console.log(fontSize);
+    return {fontSize:fontSize, width:textWidth};
 };
 
 var gifmeme = module.exports;
@@ -63,11 +60,9 @@ gifmeme.generate = function(file, topText, bottomText, next){
 
         var width = size.width;
         var height = size.height;
-        var canvas = new Canvas(width, height);
-        var ctx = canvas.getContext('2d');
 
-        var topFontSize = getFontSize(ctx, topText, width, height);
-        var bottomFontSize = getFontSize(ctx, bottomText, width, height);
+        var topFontSize = getFontSize(topText, width, height);
+        var bottomFontSize = getFontSize(bottomText, width, height);
 
         gm(file).coalesce()
             .font(__dirname+"/impact.ttf")
